@@ -15,6 +15,20 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity
+            android:name=".PickAnImage"
+            android:label="@string/displayPick" />
+        <activity
+            android:name=".MyLittleBrowser"
+            android:label="@string/little_browser_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+
+                <data android:scheme="http" />
+            </intent-filter>
+        </activity>
     </application>
 
 </manifest>
