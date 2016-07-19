@@ -1,12 +1,17 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <item
+    <item android:id="@+id/menu_share"
+        android:title="@string/shareInvite"
+        app:showAsAction="ifRoom"
+        app:actionProviderClass="android.support.v7.widget.ShareActionProvider"/>
+
+<!--    <item
         android:id="@+id/menu_share"
         android:actionProviderClass="android.widget.ShareActionProvider"
         android:orderInCategory="10"
         app:showAsAction="ifRoom"
-        android:title="Share"/>
+        android:title="Share"/>-->
     <item
         android:id="@+id/action_settings"
         android:orderInCategory="100"

@@ -2,6 +2,9 @@ package com.lightcone.sharingintents;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 
 import android.app.AlertDialog;
@@ -16,10 +19,11 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.ShareActionProvider;
+//import android.widget.ShareActionProvider;
+import android.support.v7.widget.ShareActionProvider;
 import android.widget.Toast;
 
-public class MainActivity extends Activity implements OnClickListener {
+public class MainActivity extends AppCompatActivity implements OnClickListener {
 
     private static final String TAG = "SHARE";
     private static final int REQUEST_CODE = 1;
@@ -32,6 +36,18 @@ public class MainActivity extends Activity implements OnClickListener {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        // Create top toolbar
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        // Remove default toolbar title and replace with an icon
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        }
+        // Note: getColor(color) deprecated as of API 23
+        toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
 
         // Identify buttons in XML layout and attach click  listeners to each
         View button01 = findViewById(R.id.button01);
@@ -55,7 +71,13 @@ public class MainActivity extends Activity implements OnClickListener {
         // Get the share menu item
         MenuItem menuItem = menu.findItem(R.id.menu_share);
         // Get the provider
-        shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+
+/*
+        MenuItem shareItem = menu.findItem(R.id.action_share);
+        ShareActionProvider myShareActionProvider =
+                (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
+*/
 
         return true;
     }
@@ -70,7 +92,7 @@ public class MainActivity extends Activity implements OnClickListener {
                 isBarcodeScan = false;
                 // Launch the text share intent and associate it with the ShareActionProvider
                 Intent share = shareText(inputText.getText().toString());
-                if(share==null)Log.i(TAG,"share is null");
+                Log.i(TAG,"intent="+share.toString());
                 shareActionProvider.setShareIntent(share);
 
                 // Force the soft keyboard closed so following Toast instructions easy to see
