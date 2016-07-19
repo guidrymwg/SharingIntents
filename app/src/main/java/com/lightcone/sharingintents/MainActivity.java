@@ -1,7 +1,7 @@
 package com.lightcone.sharingintents;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 
 import android.app.AlertDialog;
@@ -19,7 +19,7 @@ import android.widget.EditText;
 import android.widget.ShareActionProvider;
 import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity implements OnClickListener {
+public class MainActivity extends Activity implements OnClickListener {
 
     private static final String TAG = "SHARE";
     private static final int REQUEST_CODE = 1;
@@ -70,6 +70,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 isBarcodeScan = false;
                 // Launch the text share intent and associate it with the ShareActionProvider
                 Intent share = shareText(inputText.getText().toString());
+                if(share==null)Log.i(TAG,"share is null");
                 shareActionProvider.setShareIntent(share);
 
                 // Force the soft keyboard closed so following Toast instructions easy to see
@@ -164,7 +165,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // the main screen of the app rather than the barcode scanning screen when next
         // launched from the homescreen.
 
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
 
         /** The following should scan most standard barcode formats but one can
          restrict the formats for particular applications by adding extras to the intent.

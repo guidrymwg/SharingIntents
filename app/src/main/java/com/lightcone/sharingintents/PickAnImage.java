@@ -114,7 +114,7 @@ public class PickAnImage extends Activity implements OnClickListener {
         Intent shareIntent = new Intent();
         shareIntent.setType("image/*");
         // Clear activity stack if reset
-        shareIntent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         shareIntent.setAction(Intent.ACTION_SEND);
         Log.i(TAG, "shareImage:  Uri="+uri);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
