@@ -19,8 +19,8 @@
     <string name="shareImage">Share image using</string>
     <string name="errorTitle1">We have a problem</string>
 	<string name="errorString1">ActivityNotFoundException: No app found to handle the
-		barcode intent. One possibility: install the free app Barcode Scanner from the Android
-		Market. Google Goggles is another free app that can handle the barcode intent."</string>
+		barcode intent. One possibility: install the free app Barcode Scanner from the Play Store.
+        Google Goggles is another free app that can handle the barcode intent."</string>
     <string name="playStoreAddress">https://play.google.com/store/apps/details?</string>
     <string name="bsString">id=com.google.zxing.client.android</string>
     <string name="toaster">Select share app from top bar menu</string>
