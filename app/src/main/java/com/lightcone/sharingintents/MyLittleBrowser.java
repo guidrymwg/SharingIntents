@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -14,7 +15,7 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.ShareActionProvider;
 
-public class MyLittleBrowser extends Activity {
+public class MyLittleBrowser extends AppCompatActivity {
 
     private static final String TAG = "SHARE";
     private WebSettings wset;

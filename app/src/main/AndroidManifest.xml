@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.lightcone.sharingintents">
 
+    <uses-permission android:name="android.permission.INTERNET" ></uses-permission>
+
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -19,12 +21,14 @@
             android:name=".PickAnImage"
             android:label="@string/displayPick" />
         <activity
-            android:name=".MyLittleBrowser" >
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <data android:mimeType="text/html" />
-            </intent-filter>
+            android:name=".MyLittleBrowser"
+            android:label="@string/little_browser_name" >
+            <intent-filter >
+            <action android:name="android.intent.action.VIEW" />
+            <category
+                android:name="android.intent.category.DEFAULT" />
+            <data android:scheme="http" />
+        </intent-filter>
         </activity>
  <!--       <activity android:name="ShareActivity">
             <intent-filter>
