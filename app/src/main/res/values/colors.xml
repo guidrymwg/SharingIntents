@@ -1,10 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimary">#ff9800</color>
+    <color name="colorPrimaryDark">#f57c00</color>
+    <color name="colorAccent">#ffc107</color>
+    <color name="barColor">@color/colorPrimary</color>
+    <color name="barTextColor">#ffffff</color>color>
+    <color name="bkg">#99ffe0b2</color>
+    <!--<color name="bkg">#ffffff</color>-->
+    <color name="textbkg">#ccffffff</color>
+
+   <!-- <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="barColor">@color/colorPrimary</color>
     <color name="barTextColor">#ffffff</color>color>
     <color name="bkg">#ffffff</color>
-    <color name="textbkg">#efefef</color>
+    <color name="textbkg">#efefef</color>-->
 </resources>
