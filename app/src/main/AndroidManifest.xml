@@ -19,16 +19,20 @@
             android:name=".PickAnImage"
             android:label="@string/displayPick" />
         <activity
-            android:name=".MyLittleBrowser"
-            android:label="@string/little_browser_name" >
+            android:name=".MyLittleBrowser" >
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
-
                 <category android:name="android.intent.category.DEFAULT" />
-
-                <data android:scheme="http" />
+                <data android:mimeType="text/html" />
             </intent-filter>
         </activity>
+ <!--       <activity android:name="ShareActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.SEND"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <data android:mimeType="text/plain"/>
+            </intent-filter>
+        </activity>-->
     </application>
 
 </manifest>
