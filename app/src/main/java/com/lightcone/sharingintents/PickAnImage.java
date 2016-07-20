@@ -9,7 +9,11 @@ import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -17,9 +21,10 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
-import android.widget.ShareActionProvider;
+import android.support.v7.widget.ShareActionProvider;
+//import android.widget.ShareActionProvider;
 
-public class PickAnImage extends Activity implements OnClickListener {
+public class PickAnImage extends AppCompatActivity implements OnClickListener {
 
     private static final String TAG = "SHARE";
     private static final int REQUEST_CODE = 1;
@@ -35,6 +40,25 @@ public class PickAnImage extends Activity implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pickanimage);
+
+        // Create top toolbar
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
+        // Remove default toolbar title and replace with an icon
+        if (toolbar != null) {
+            toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+        }
+
+        // Set background color.  Handle method getColor deprecated as of API 23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor, null));
+        } else {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        }
+        // Note: getColor(color) deprecated as of API 23
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
         imageView = (ImageView) findViewById(R.id.theImage);
         shareButton = (Button) findViewById(R.id.button04);
         shareButton.setOnClickListener(this);
@@ -50,7 +74,7 @@ public class PickAnImage extends Activity implements OnClickListener {
         // Get the share menu item
         MenuItem menuItem = menu.findItem(R.id.menu_share);
         // Get the provider
-        shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
         return true;
     }
@@ -111,11 +135,11 @@ public class PickAnImage extends Activity implements OnClickListener {
     // will open the sharing menu (if the startActivity line below is not commented out).
 
     public Intent shareImage(Uri uri){
-        Intent shareIntent = new Intent();
+        Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         // Clear activity stack if reset
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
-        shareIntent.setAction(Intent.ACTION_SEND);
+        //shareIntent.setAction(Intent.ACTION_SEND);
         Log.i(TAG, "shareImage:  Uri="+uri);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
@@ -135,6 +159,10 @@ public class PickAnImage extends Activity implements OnClickListener {
         switch(v.getId()){
 
             case R.id.button04:
+                Log.i(TAG,"uri="+uri.toString());
+                Intent temp = shareImage(uri);
+                Log.i(TAG,"intent="+temp.toString());
+
                 shareActionProvider.setShareIntent(shareImage(uri));
                 break;
         }

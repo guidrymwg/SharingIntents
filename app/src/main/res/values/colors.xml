@@ -5,4 +5,6 @@
     <color name="colorAccent">#FF4081</color>
     <color name="barColor">@color/colorPrimary</color>
     <color name="barTextColor">#ffffff</color>color>
+    <color name="bkg">#ffffff</color>
+    <color name="textbkg">#efefef</color>
 </resources>

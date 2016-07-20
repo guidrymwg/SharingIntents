@@ -1,6 +1,7 @@
 package com.lightcone.sharingintents;
 
 import android.app.Activity;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -44,8 +45,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         if (toolbar != null) {
             toolbar.setNavigationIcon(R.mipmap.ic_launcher);
         }
+
+        // Set background color.  Handle method getColor deprecated as of API 23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor, null));
+        } else {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        }
         // Note: getColor(color) deprecated as of API 23
-        toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
@@ -72,12 +80,6 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         MenuItem menuItem = menu.findItem(R.id.menu_share);
         // Get the provider
         shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-
-/*
-        MenuItem shareItem = menu.findItem(R.id.action_share);
-        ShareActionProvider myShareActionProvider =
-                (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
-*/
 
         return true;
     }

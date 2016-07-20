@@ -4,6 +4,14 @@
     android:layout_height="wrap_content"
     android:orientation="vertical" >
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar2"
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:elevation="0dp"
+        android:minHeight="?attr/actionBarSize"
+        android:background="@color/barColor" />
+
     <ImageView
         android:id="@+id/theImage"
         android:layout_width="match_parent"
