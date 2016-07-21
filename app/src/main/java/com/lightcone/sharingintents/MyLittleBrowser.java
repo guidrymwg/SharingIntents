@@ -5,9 +5,11 @@ import java.net.URL;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -29,10 +31,32 @@ public class MyLittleBrowser extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        // Create top toolbar
+
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
+        if(toolbar==null) Log.i(TAG, "Toolbar is null");
+        // Remove default toolbar title and replace with an icon
+        toolbar.setNavigationIcon(R.mipmap.ic_launcher);
+
+
+        // Set background color.  Handle method getColor deprecated as of API 23
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor, null));
+        } else {
+            toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        }
+        // Note: getColor(color) deprecated as of API 23
+        //toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+        toolbar.setTitle("");
+        setSupportActionBar(toolbar);
+
+
         // Set up the WebView display.  See the projects WebViewDemo and WebViewDemo2
         // for more detailed discussion.
 
-        WebView webview = new WebView(this);
+        WebView webview = (WebView) findViewById(R.id.webView); //new WebView(this);
+
+        if(webview==null) Log.i(TAG, "Webview is null");
 
         // The following prevents redirection out of MyLittleBrowser to another browser, forcing
         // redirects from pages displayed in MyLittleBrowser to stay in MyLittleBrowser.
