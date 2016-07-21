@@ -30,6 +30,7 @@ public class MyLittleBrowser extends AppCompatActivity {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.mylittlebrowser);
 
         // Create top toolbar
 
@@ -84,7 +85,7 @@ public class MyLittleBrowser extends AppCompatActivity {
             }
         });
 
-        setContentView(webview);
+        //setContentView(webview);
         wset = webview.getSettings();
         wset.setBuiltInZoomControls(true);
         wset.setJavaScriptEnabled(true);
