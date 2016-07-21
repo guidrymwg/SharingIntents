@@ -6,6 +6,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.Menu;
@@ -13,7 +14,8 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ShareActionProvider;
+//import android.widget.ShareActionProvider;
+import android.support.v7.widget.ShareActionProvider;
 
 public class MyLittleBrowser extends AppCompatActivity {
 
@@ -54,7 +56,7 @@ public class MyLittleBrowser extends AppCompatActivity {
                 // Attach an intent to the ShareActionProvider that will share the title and
                 // url of the webpage loaded.
 
-                shareActionProvider.setShareIntent(shareText(webpageTitle+":\n\n"+url));
+                //shareActionProvider.setShareIntent(shareText(webpageTitle+":\n\n"+url));
             }
         });
 
@@ -118,7 +120,7 @@ public class MyLittleBrowser extends AppCompatActivity {
         // Get the provider. We will invoke it in onPageFinished(webview, url) to
         // enable a text share of the page title and URL once a webpage is loaded.
 
-        shareActionProvider = (ShareActionProvider) menuItem.getActionProvider();
+        shareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(menuItem);
 
         return true;
     }
