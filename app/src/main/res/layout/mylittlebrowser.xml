@@ -16,7 +16,7 @@
         android:layout_width="match_parent"
         android:elevation="0dp"
         android:minHeight="?attr/actionBarSize"
-        android:background="@color/barColor" />
+        android:background="@color/browserPrimary" />
 
     <WebView
         android:layout_width="match_parent"

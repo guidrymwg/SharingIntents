@@ -2,7 +2,6 @@ package com.lightcone.sharingintents;
 
 import java.net.URL;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
@@ -16,7 +15,6 @@ import android.view.MenuItem;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-//import android.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider;
 
 public class MyLittleBrowser extends AppCompatActivity {
@@ -46,8 +44,7 @@ public class MyLittleBrowser extends AppCompatActivity {
         } else {
             toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
         }
-        // Note: getColor(color) deprecated as of API 23
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 

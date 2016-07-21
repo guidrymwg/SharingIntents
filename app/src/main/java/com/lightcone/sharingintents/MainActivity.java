@@ -52,8 +52,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         } else {
             toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
         }
-        // Note: getColor(color) deprecated as of API 23
-        //toolbar.setTitleTextColor(getResources().getColor(R.color.barTextColor));
+
         toolbar.setTitle("");
         setSupportActionBar(toolbar);
 
