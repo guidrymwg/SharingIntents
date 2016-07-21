@@ -81,7 +81,7 @@ public class MyLittleBrowser extends AppCompatActivity {
                 // Attach an intent to the ShareActionProvider that will share the title and
                 // url of the webpage loaded.
 
-                //shareActionProvider.setShareIntent(shareText(webpageTitle+":\n\n"+url));
+                shareActionProvider.setShareIntent(shareText(webpageTitle+":\n\n"+url));
             }
         });
 
