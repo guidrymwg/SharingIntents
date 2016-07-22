@@ -63,6 +63,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         button02.setOnClickListener(this);
         View button03 = findViewById(R.id.button03);
         button03.setOnClickListener(this);
+        View browserButton = findViewById(R.id.browserButton);
+        browserButton.setOnClickListener(this);
 
         // Get handle to input text field
         inputText = (EditText) findViewById(R.id.editText1);
@@ -86,6 +88,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     // Process button clicks
     @Override
     public void onClick(View v) {
+
         switch(v.getId()){
 
             // For button 1, share string data
@@ -117,6 +120,18 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
             case R.id.button03:
                 Intent j = new Intent(this, PickAnImage.class);
                 startActivity(j);
+                break;
+
+            // For browserButton, test the shared custom browser MyLittleBrowser.  If
+            // no preferred browser has been set, this should display a list of
+            // apps registered to display webpages, including MyLittleBrowser.  Choosing
+            // MyLittleBrowser should display the url given below in MyLittleBrowser.
+
+            case R.id.browserButton:
+                String url = "http://developers.google.com";
+                Intent k = new Intent(Intent.ACTION_VIEW);
+                k.setData(Uri.parse(url));
+                startActivity(k);
                 break;
         }
     }

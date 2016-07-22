@@ -8,6 +8,7 @@
     <string name="button2_label">Scan and Share Barcode</string>
     <string name="button3_label">Select an Image</string>
     <string name="button4_label">Share this Image</string>
+    <string name="browserButtonLabel">Test Browser Share</string>
     <string name="shareInvite">Share using</string>
     <string name="subject">My custom subject</string>
     <string name="websubject">Webpage share</string>
