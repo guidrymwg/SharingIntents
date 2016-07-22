@@ -2,23 +2,15 @@
 
     <!-- Base application theme. NoActionBar because we are using a Toolbar -->
     <style name="AppTheme" parent="Theme.AppCompat.Light.NoActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
-        <!-- Set AppCompat actionBarStyle -->
-        <!--<item name="actionBarStyle">@style/AppTheme</item>-->
     </style>
 
     <style name="BrowserTheme" parent="AppTheme">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/browserPrimary</item>
         <item name="colorPrimaryDark">@color/browserPrimaryDark</item>
         <item name="colorAccent">@color/browserAccent</item>
-
-        <!-- Set AppCompat actionBarStyle -->
-        <!--<item name="actionBarStyle">@style/BrowserTheme</item>-->
     </style>
 
 </resources>
