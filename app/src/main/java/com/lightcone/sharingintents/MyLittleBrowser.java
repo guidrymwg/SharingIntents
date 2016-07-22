@@ -24,19 +24,21 @@ public class MyLittleBrowser extends AppCompatActivity {
     private ShareActionProvider shareActionProvider;
     private String urlString;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.mylittlebrowser);
 
-        // Create top toolbar
+        // Create top toolbar.  This assumes a NoActionBar style in styles.xml
+        // since it will be replaced by the following toolbar.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar3);
-        if(toolbar==null) Log.i(TAG, "Toolbar is null");
+        if (toolbar == null) Log.i(TAG, "Toolbar is null");
         // Remove default toolbar title and replace with an icon
         toolbar.setNavigationIcon(R.mipmap.ic_launcher);
-
 
         // Set background color.  Handle method getColor deprecated as of API 23
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
@@ -54,7 +56,7 @@ public class MyLittleBrowser extends AppCompatActivity {
 
         WebView webview = (WebView) findViewById(R.id.webView); //new WebView(this);
 
-        if(webview==null) Log.i(TAG, "Webview is null");
+        if (webview == null) Log.i(TAG, "Webview is null");
 
         // The following prevents redirection out of MyLittleBrowser to another browser, forcing
         // redirects from pages displayed in MyLittleBrowser to stay in MyLittleBrowser.
@@ -62,7 +64,7 @@ public class MyLittleBrowser extends AppCompatActivity {
         // android-webview-how-to-handle-redirects-in-app-instead-of-opening-a-browser
 
         webview.setWebViewClient(new WebViewClient() {
-            public boolean shouldOverrideUrlLoading(WebView view, String url){
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return false;
             }
@@ -70,7 +72,7 @@ public class MyLittleBrowser extends AppCompatActivity {
             // This will fire when main webpage has finished loading.  We use it
             // to enable a text share of the page title and URL.
 
-            public void onPageFinished(WebView view, String url){
+            public void onPageFinished(WebView view, String url) {
 
                 // Get the title of the webpage once loaded
                 String webpageTitle = view.getTitle();
@@ -78,28 +80,28 @@ public class MyLittleBrowser extends AppCompatActivity {
                 // Attach an intent to the ShareActionProvider that will share the title and
                 // url of the webpage loaded.
 
-                shareActionProvider.setShareIntent(shareText(webpageTitle+":\n\n"+url));
+                shareActionProvider.setShareIntent(shareText(webpageTitle + ":\n\n" + url));
             }
         });
 
         //setContentView(webview);
         wset = webview.getSettings();
         wset.setBuiltInZoomControls(true);
-        wset.setJavaScriptEnabled(true);
+        wset.setJavaScriptEnabled(true);  // Turning on Javascript can introduce vulnerabilities
 
         /** This class is launched only by an implicit share intent from an app requesting that
          * a webpage be displayed because of the declaration in the manifest file of the
          * present app
          *
          * <activity android:name=".MyLittleBrowser" android:label="@string/little_browser_name">
-         <intent-filter>
-         <action android:name="android.intent.action.VIEW" />
-         <category android:name="android.intent.category.DEFAULT" />
-         <data android:scheme="http"/>
-         </intent-filter>
+             <intent-filter>
+             <action android:name="android.intent.action.VIEW" />
+             <category android:name="android.intent.category.DEFAULT" />
+             <data android:scheme="http"/>
+             </intent-filter>
          * </activity>
          *
-         * (It is never launched by an explicit intent from the present application.) Thus we must
+         * Thus we must
          * first query the Intent that launched this class (very likely from a completely different app)
          * to retrieve the data that it contains. If all is well this will be the address of an HTML
          * page, which we shall display using WebView.
@@ -121,10 +123,10 @@ public class MyLittleBrowser extends AppCompatActivity {
             String path = intentData.getPath();
             String query = intentData.getQuery();
             urlString = new URL(scheme, host, path).toString();
-            if(query != null) urlString = urlString + "?"+ query;
+            if (query != null) urlString = urlString + "?" + query;
             webview.loadUrl(urlString);
-            Log.i(TAG, "scheme="+scheme+" host="+host+" path="+path+" query="+query);
-            Log.i(TAG, "action="+intentAction+" URL="+urlString);
+            Log.i(TAG, "scheme=" + scheme + " host=" + host + " path=" + path + " query=" + query);
+            Log.i(TAG, "action=" + intentAction + " URL=" + urlString);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -154,7 +156,7 @@ public class MyLittleBrowser extends AppCompatActivity {
     // ShareActionProvider menu when the webpage has finished loading; this is
     // invoked in the method onPageFinished() defined above.
 
-    public Intent shareText(String s){
+    public Intent shareText(String s) {
 
         // Create a sharing intent
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -165,10 +167,10 @@ public class MyLittleBrowser extends AppCompatActivity {
         // These allow some custom addresses to be defined. They will be filled in
         // automatically if an email client is invoked for the share, for example.
 
-        String addresses [] = {getString(R.string.address1),
+        String addresses[] = {getString(R.string.address1),
                 getString(R.string.address2)};
-        String CCaddresses [] = {getString(R.string.CC1)};
-        String BCCaddresses [] = {getString(R.string.BCC1)};
+        String CCaddresses[] = {getString(R.string.CC1)};
+        String BCCaddresses[] = {getString(R.string.BCC1)};
 
         // Add the text to be shared to the intent
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, s);

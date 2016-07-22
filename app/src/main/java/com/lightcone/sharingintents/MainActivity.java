@@ -1,6 +1,5 @@
 package com.lightcone.sharingintents;
 
-import android.app.Activity;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.view.MenuItemCompat;
@@ -20,7 +19,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-//import android.widget.ShareActionProvider;
 import android.support.v7.widget.ShareActionProvider;
 import android.widget.Toast;
 
@@ -38,7 +36,8 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Create top toolbar
+        // Create top toolbar.  This assumes a NoActionBar style in styles.xml
+        // since it will be replaced by the following toolbar.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         // Remove default toolbar title and replace with an icon
@@ -89,14 +88,14 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
 
             // For button 1, share string data
             case R.id.button01:
                 isBarcodeScan = false;
                 // Launch the text share intent and associate it with the ShareActionProvider
                 Intent share = shareText(inputText.getText().toString());
-                Log.i(TAG,"intent="+share.toString());
+                Log.i(TAG, "intent=" + share.toString());
                 shareActionProvider.setShareIntent(share);
 
                 // Force the soft keyboard closed so following Toast instructions easy to see
@@ -116,7 +115,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 shareActionProvider.setShareIntent(shareBarcode());
                 break;
 
-            // For button 3, pick an image from gallery or other sources
+            // For button 3, pick an image from gallery or other sources and share
             case R.id.button03:
                 Intent j = new Intent(this, PickAnImage.class);
                 startActivity(j);
@@ -140,7 +139,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     // the sharing intent that it creates for potential use in the
     // ShareActionProvider that is managing the share menu in the top action bar.
 
-    public Intent shareText(String s){
+    public Intent shareText(String s) {
 
         // Create a sharing intent
         Intent sharingIntent = new Intent(android.content.Intent.ACTION_SEND);
@@ -151,10 +150,9 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // These allow some custom addresses to be defined. They will be filled in
         // automatically if an email client is invoked for the share, for example.
 
-        String addresses [] = {getString(R.string.address1),
-                getString(R.string.address2)};
-        String CCaddresses [] = {getString(R.string.CC1)};
-        String BCCaddresses [] = {getString(R.string.BCC1)};
+        String addresses[] = {getString(R.string.address1), getString(R.string.address2)};
+        String CCaddresses[] = {getString(R.string.CC1)};
+        String BCCaddresses[] = {getString(R.string.BCC1)};
 
         // Add the text to be shared to the intent
         sharingIntent.putExtra(android.content.Intent.EXTRA_TEXT, s);
@@ -176,22 +174,22 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
         // the intent in a chooser and start. If it is from input text, don't
         // start here (will be invoked from the task bar share menu in that case).
 
-        if(isBarcodeScan) startActivity(Intent.createChooser(sharingIntent,
+        if (isBarcodeScan) startActivity(Intent.createChooser(sharingIntent,
                 getString(R.string.shareInvite)));
 
         return sharingIntent;
     }
 
     /**
-     Following method for scanning barcodes adapted from article by Alexander Lucas at
-
-     http://android-developers.blogspot.com/2012/02/share-with-intents.html
-
-     For this to work you must have an app installed on the device that can handle
-     the barcode scanning intent.  Barcode Scanner or Google Goggles are available for
-     free from the Google Play Store and will do the job.  Below we will check to see if
-     there is a barcode scanning app on the device and give the user a choice of installing
-     Barcode Scanner from the Play Store if not.
+     * Following method for scanning barcodes adapted from article by Alexander Lucas at
+     *
+     * http://android-developers.blogspot.com/2012/02/share-with-intents.html
+     *
+     * For this to work you must have an app installed on the device that can handle
+     * the barcode scanning intent.  Barcode Scanner or Google Goggles are available for
+     * free from the Google Play Store and will do the job.  Below we will check to see if
+     * there is a barcode scanning app on the device and give the user a choice of installing
+     * Barcode Scanner from the Play Store if not.
      */
 
     public Intent shareBarcode() {
@@ -233,7 +231,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
 
             startActivityForResult(intent, REQUEST_CODE);
 
-        } catch(ActivityNotFoundException e1){
+        } catch (ActivityNotFoundException e1) {
             // If no barcode scanning app on device, notify and give option to acquire one
             e1.printStackTrace();
             String errorTitle = getString(R.string.errorTitle1);
@@ -254,10 +252,10 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
                 //  Results have been returned, so process them
                 String contents = intent.getStringExtra("SCAN_RESULT");
                 String format = intent.getStringExtra("SCAN_RESULT_FORMAT");
-                Log.i(TAG, "scan string="+contents+" scan format="+format);
+                Log.i(TAG, "scan string=" + contents + " scan format=" + format);
                 shareText(contents);
             } else if (resultCode == RESULT_CANCELED) {
-                String error =  getString(R.string.barcode_cancel);
+                String error = getString(R.string.barcode_cancel);
                 Toast.makeText(this, error, Toast.LENGTH_SHORT).show();
             }
         }
@@ -274,7 +272,7 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
      * downloading a different barcode app like Google Goggles).
      */
 
-    private void showTask(String title, String message, int icon, Context context){
+    private void showTask(String title, String message, int icon, Context context) {
         AlertDialog alertDialog = new AlertDialog.Builder(context).create();
         alertDialog.setTitle(title);
         alertDialog.setMessage(message);
@@ -303,15 +301,15 @@ public class MainActivity extends AppCompatActivity implements OnClickListener {
     // Scanner from the Android app market (Play Store) if the device doesn't have a barcode scanner
     // app installed.
 
-    private void launchTask(){
+    private void launchTask() {
         String marketString = getString(R.string.playStoreAddress) + getString(R.string.bsString);
         goToMarket(marketString);
     }
 
     // Go to Android Play Store for a specific app defined by its url address in Play Store.
-    private void goToMarket(String appString){
+    private void goToMarket(String appString) {
         Intent i = new Intent(Intent.ACTION_VIEW);
-        i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
+        i.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         i.setData(Uri.parse(appString));
         startActivity(i);
     }

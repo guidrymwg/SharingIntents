@@ -22,7 +22,6 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.support.v7.widget.ShareActionProvider;
-//import android.widget.ShareActionProvider;
 
 public class PickAnImage extends AppCompatActivity implements OnClickListener {
 
@@ -34,14 +33,17 @@ public class PickAnImage extends AppCompatActivity implements OnClickListener {
     private Uri uri;
     private ShareActionProvider shareActionProvider;
 
-    /** Called when the activity is first created. */
+    /**
+     * Called when the activity is first created.
+     */
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.pickanimage);
 
-        // Create top toolbar
+        // Create top toolbar.  This assumes a NoActionBar style in styles.xml,
+        // since it will be replaced by the following toolbar.
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar2);
         // Remove default toolbar title and replace with an icon
@@ -130,17 +132,17 @@ public class PickAnImage extends AppCompatActivity implements OnClickListener {
     // Share the bitmap that was selected from the local filesystem using the chooseImage()
     // method by using an implicit intent.  When launched with
     // shareActionProvider.setShareIntent(shareImage(uri)) in the onClick method below,
-    // this will populate the top Action Bar with an adaptive sharing menu (most used apps
+    // this will populate the top Toolbar with an adaptive sharing menu (most used apps
     // will float to the top and the current default will appear as a separate icon), and
     // will open the sharing menu (if the startActivity line below is not commented out).
 
-    public Intent shareImage(Uri uri){
+    public Intent shareImage(Uri uri) {
         Intent shareIntent = new Intent(Intent.ACTION_SEND);
         shareIntent.setType("image/*");
         // Clear activity stack if reset
         shareIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_DOCUMENT);
         //shareIntent.setAction(Intent.ACTION_SEND);
-        Log.i(TAG, "shareImage:  Uri="+uri);
+        Log.i(TAG, "shareImage:  Uri=" + uri);
         shareIntent.putExtra(Intent.EXTRA_STREAM, uri);
 
         // Comment out following line to populate top ActionBar with adaptive sharing menu
@@ -156,12 +158,12 @@ public class PickAnImage extends AppCompatActivity implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        switch(v.getId()){
+        switch (v.getId()) {
 
             case R.id.button04:
-                Log.i(TAG,"uri="+uri.toString());
+                Log.i(TAG, "uri=" + uri.toString());
                 Intent temp = shareImage(uri);
-                Log.i(TAG,"intent="+temp.toString());
+                Log.i(TAG, "intent=" + temp.toString());
 
                 shareActionProvider.setShareIntent(shareImage(uri));
                 break;
