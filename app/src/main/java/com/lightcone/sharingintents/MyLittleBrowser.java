@@ -64,6 +64,15 @@ public class MyLittleBrowser extends AppCompatActivity {
         // android-webview-how-to-handle-redirects-in-app-instead-of-opening-a-browser
 
         webview.setWebViewClient(new WebViewClient() {
+
+            /* The shouldOverrideUrlLoading(Webview, String) method is deprecated in API 24 in favor
+            of a new method shouldOverrideUrlLoading(Webview, WebResourceRequest).  It still works in
+            * 24 and is required for backward compatibility, so we leave it.  For a discussion of
+            * how to incorporate both the old deprecated version and the new version, see
+            *   http://stackoverflow.com/questions/36484074/is-shouldoverrideurlloading-really
+            *   -deprecated-what-can-i-use-instead
+            * */
+
             public boolean shouldOverrideUrlLoading(WebView view, String url) {
                 view.loadUrl(url);
                 return false;
